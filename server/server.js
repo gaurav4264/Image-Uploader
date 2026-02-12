@@ -21,6 +21,11 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Routes
 app.use('/api/images', imageRoutes);
 
+// Root route (Welcome message)
+app.get('/', (req, res) => {
+    res.send('API is running. Access /api/images to get images.');
+});
+
 // Health check
 app.get('/api/health', (req, res) => {
     res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
