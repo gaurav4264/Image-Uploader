@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../api';
 import { toast, confirmToast } from './Toast';
 
 const ImageList = ({ images, loading, onDelete }) => {
@@ -11,7 +11,7 @@ const ImageList = ({ images, loading, onDelete }) => {
 
         setDeletingId(id);
         try {
-            await axios.delete(`/api/images/${id}`);
+            await api.delete(`/api/images/${id}`);
             toast.success('Image deleted successfully');
             onDelete();
         } catch (error) {
@@ -78,7 +78,7 @@ const ImageList = ({ images, loading, onDelete }) => {
                             </div>
                             <div className="thumbnail-container">
                                 <img
-                                    src={`/${image.small}`}
+                                    src={`${api.defaults.baseURL}/${image.small}`}
                                     alt={image.originalName || 'Small Preview'}
                                     loading="lazy"
                                 />
@@ -88,13 +88,13 @@ const ImageList = ({ images, loading, onDelete }) => {
                             </div>
                             <div className="image-info">
                                 <div className="links">
-                                    <a href={`/${image.original}`} target="_blank" rel="noopener noreferrer" className="btn-link original">
+                                    <a href={`${api.defaults.baseURL}/${image.original}`} target="_blank" rel="noopener noreferrer" className="btn-link original">
                                         Original
                                     </a>
-                                    <a href={`/${image.medium}`} target="_blank" rel="noopener noreferrer" className="btn-link medium">
+                                    <a href={`${api.defaults.baseURL}/${image.medium}`} target="_blank" rel="noopener noreferrer" className="btn-link medium">
                                         Medium
                                     </a>
-                                    <a href={`/${image.large}`} target="_blank" rel="noopener noreferrer" className="btn-link large">
+                                    <a href={`${api.defaults.baseURL}/${image.large}`} target="_blank" rel="noopener noreferrer" className="btn-link large">
                                         Large
                                     </a>
                                     <button

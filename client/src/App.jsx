@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from './api';
 import ToastProvider from './components/Toast';
 import FileUpload from './components/FileUpload';
 import ImageList from './components/ImageList';
@@ -12,7 +12,7 @@ function App() {
     const fetchImages = async () => {
         try {
             setLoading(true);
-            const res = await axios.get('/api/images');
+            const res = await api.get('/api/images');
             setImages(res.data);
         } catch (error) {
             console.error('Error fetching images:', error);

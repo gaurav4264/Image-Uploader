@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import axios from 'axios';
+import api from '../api';
 import { toast } from './Toast';
 
 const FileUpload = ({ onUploadSuccess }) => {
@@ -89,7 +89,7 @@ const FileUpload = ({ onUploadSuccess }) => {
         setProgress(0);
 
         try {
-            const res = await axios.post('/api/images/upload', formData, {
+            const res = await api.post('/api/images/upload', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
                 onUploadProgress: (progressEvent) => {
                     const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
